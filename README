@@ -1,0 +1,15 @@
+ActsAsI18nUi
+============
+
+An ActiveController extension to create a user interface to manage I18n
+translations.
+
+
+Example
+=======
+
+class I18nController < ApplicationController
+  acts_as_i18n_ui
+end
+
+Copyright (c) 2008 Horaci Cuevas, released under the MIT license
