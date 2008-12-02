@@ -1,0 +1,5 @@
+		<ul>
+<% 	tr[:base].each_with_index do |value,key| -%>
+			<li><b><%=key.to_s -%></b> (<em><%=tr[:base][key] || "" -%></em>)<%= tr[:value][key] || "" if tr[:value] -%></li>
+<% end -%>
+		</ul>

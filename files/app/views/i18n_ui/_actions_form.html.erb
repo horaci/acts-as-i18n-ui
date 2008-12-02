@@ -1,0 +1,22 @@
+<a href='#' onClick="$('create_locale_form').toggle()">&raquo; Create a new locale</a>
+
+<div id='create_locale_form' style='display:none'>
+	
+<% form_tag :action => "create_locale" do -%>
+
+<p>
+	<label for="create_locale_form_locale">Locale code:</label><input id="create_locale_form_locale" type="text" name="locale" size="5" value="">
+</p>
+
+<p>
+	<label for="create_locale_form_locale">Locale name:<label><input id="create_locale_form_locale_name" type="text" name="locale_name" value="">
+</p>
+
+<p align='right'>
+	<input type="submit" class="button create" value="Create">
+</p>
+
+<% end %>
+
+
+</div>

@@ -1,0 +1,15 @@
+<% 
+	tr = @translations[params[:key]] 
+-%>
+<div class='translation-box-content'>
+<% form_remote_tag( 
+		:url => { :action => "update", :type => tr[:type], :key => params[:key], :locale => params[:locale], :base_locale => params[:base_locale] }, 
+		:update => "translation_#{params[:key]}", 
+		:loading => "$('loader_#{params[:key]}').show()",
+		:complete => "$('translation_#{params[:key]}').className= 'translation-box'; $('loader_#{params[:key]}').hide()" 
+	) do |form| %>
+	
+<%= render :partial => "i18n_ui/edit_" + tr[:type], :locals => { :form => form, :tr => tr } %>	
+<%= render :partial => "i18n_ui/save_cancel_buttons" %>
+<% end %>
+</div>

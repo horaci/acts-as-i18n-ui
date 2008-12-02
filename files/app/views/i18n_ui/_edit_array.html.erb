@@ -1,0 +1,15 @@
+	<p><b>Base locale [<%=params[:base_locale]%>]:</b> <%=tr[:base].to_sentence%></p>
+	<p><b>Previous value [<%=params[:locale]%>]:</b> <%= tr[:value].class == Array ? tr[:value].to_sentence : tr[:value] %></p>
+<% unless tr[:value].nil? or tr[:value].class == Array %>
+	<p class='warning'>Warning: The base type is not the same as the locale you are translating. Try using another base locale for this key.</p>
+<% end %>
+
+<table class='table_editable'>
+<%tr[:base].each_with_index do |base,key| %>
+<tr>
+	<td><b>[#<%=key%>]</b></td><td>(<%= tr[:base][key] %>)</td>
+	<td><%= text_field_tag "value[#{key}]", tr[:value].nil? ? "" : tr[:value][key] || "" , :id=> "value_#{params[:key]}_#{key.to_s}", :class => "textfield_editable" %></td>
+	<td><%= render :partial => "i18n_ui/google_translate_link", :locals => { :value => tr[:base][key], :field => "value_#{params[:key]}_#{key.to_s}", :locale => params[:locale], :base_locale => params[:base_locale] } %></td>
+</tr>
+<% end %>
+</table>

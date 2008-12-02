@@ -1,0 +1,22 @@
+	<div class='translation-box-content' onclick="<%=
+	remote_function( 
+		:url => { :action => "edit", :key => key, :locale => params[:locale], :base_locale => params[:base_locale] }, 
+		:update => "translation_#{key}", 
+		:complete => "$('translation_#{key}').className= 'translation-box-editable'; $('loader_#{key}').hide()",
+		:loading => "$('loader_#{key}').show()"
+	)
+%>">
+<%	
+	case tr[:type]
+		when "hash":
+			partial = "i18n_ui/translation_hash"
+	 	when "array": 
+			partial = "i18n_ui/translation_array"
+		when "bool":
+			partial = "i18n_ui/translation_bool"
+		else
+			partial = "i18n_ui/translation_string"
+    end
+-%>
+<%= render :partial => partial, :locals => { :key => key, :tr => tr } -%>
+	</div>

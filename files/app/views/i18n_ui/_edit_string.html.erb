@@ -1,0 +1,8 @@
+	<p><b>Base locale [<%=params[:base_locale]%>]: </b><%=tr[:base]%></p>
+	<p><b>Previous value [<%=params[:locale]%>]: </b><%=tr[:value].nil? ? "Not set" : tr[:value] %></p>
+<% unless tr[:value].nil? or tr[:value].class == String %>
+	<p class='warning'>Warning: The base type is not the same as the locale you are translating. Try using another base locale for this key.</p>
+<% end %>
+	
+<%= text_area_tag :value, tr[:value], :id => "value_#{params[:key]}", :class => "textarea_editable" %><br/>
+<%= render :partial => "i18n_ui/google_translate_link", :locals => { :value => tr[:base], :field => "value_#{params[:key]}", :locale => params[:locale], :base_locale => params[:base_locale] } %>

@@ -1,0 +1,25 @@
+<% form_tag do -%>
+
+<p>
+	<b>Locale to translate: </b><br/>
+	<%= select_tag :locale, options_for_select( @languages.map { |locale| ["[#{locale}] - #{t "locale_name".to_sym, :locale => locale, :default => "(locale name not found)"}", locale.to_s] }, @locale ) %>
+</p>
+
+<p>
+	<b>Scope filter: </b><br/>
+	<%= text_field_tag :scope, params[:scope] %>
+</p>
+<p>
+	<b>Filter by status: </b><br/>
+	<%= select_tag :status, options_for_select( [["All","all"], ["Only translated", "translated"], ["Only untranslated", "untranslated"]], params[:status] ) %>
+</p>
+
+<p>
+	<b>Base locale preference: </b><br/>
+	<%= select_tag :base_locale, options_for_select( @languages.map { |locale| ["[#{locale}] - #{t "locale_name".to_sym, :locale => locale, :default => "(locale name not found)"}", locale.to_s] }, @base_locale ) %>
+</p>
+
+
+<p align='right'><%= submit_tag :filter, :value => "Filter", :class => "button create" %></p>
+
+<% end %>	

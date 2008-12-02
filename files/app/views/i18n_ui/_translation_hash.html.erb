@@ -1,0 +1,10 @@
+<% 		
+		options = []
+		options += tr[:base].keys if tr[:base].is_a?( Hash )
+		options += tr[:value].keys if tr[:value].is_a?( Hash )
+-%>
+		<ul>
+<% 	options.uniq.each do |key| -%>
+			<li><b><%=key%></b> (<em><%=tr[:base][key] || "" %></em>) <%=tr[:value][key] if tr[:value] and tr[:value][key]%></li>
+<% 	end -%>
+		</ul>

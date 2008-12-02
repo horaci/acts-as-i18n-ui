@@ -1,0 +1,8 @@
+<%= link_to_remote( "Google Translate", 
+		:url => { 
+			:action => "translate_google", :value => value, :locale => locale, :base_locale => base_locale 
+		}, 
+		:complete => "$('#{field}').value=request.responseText; $('#{field}').highlight()"
+
+	)
+%>

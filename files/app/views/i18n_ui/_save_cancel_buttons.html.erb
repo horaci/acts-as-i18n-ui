@@ -1,0 +1,10 @@
+<p align='right'>
+	<%= submit_tag( "Save", :name => 'save', :class => "button save" )%> 
+	<%= button_to_remote( 'Cancel', { 
+			:url => { :action => "cancel", :key => params[:key], :locale => params[:locale], :base_locale => params[:base_locale] }, 
+			:update => "translation_#{params[:key]}", 
+			:complete => "$('translation_#{params[:key]}').className= 'translation-box'"
+		},{
+			:class => "button cancel"
+		})%>
+</p>

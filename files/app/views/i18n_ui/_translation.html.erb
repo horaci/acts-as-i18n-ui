@@ -1,0 +1,9 @@
+<%
+	# Comes from a sorted hash
+	key = translation[0]
+	tr = translation[1]
+%>
+<h3 class='translation-title'><%=key%> <span id='loader_<%=key%>' class='loader' style='display:none'></span></h3>
+<div id='translation_<%=key%>' class='translation-box'>
+<%= render :partial => "i18n_ui/translation_body", :locals => { :key => key, :tr => tr } %>
+</div>

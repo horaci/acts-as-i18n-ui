@@ -1,0 +1,10 @@
+	<p><b>Base locale [<%=params[:base_locale]%>]:</b> <%=tr[:base]%></p>
+	<p><b>Previous value [<%=params[:locale]%>]:</b> <%=tr[:value].nil? ? "Not set" : tr[:value] %></p>
+<% unless tr[:value].nil? or tr[:value].class == TrueClass or tr[:value].class == FalseClass %>
+	<p class='warning'>Warning: The base type is not the same as the locale you are translating. Try using another base locale for this key.</p>
+<% end %>
+<br/>
+<p>
+<label for='value_true'>True: </label><%= radio_button_tag :value, "true", tr[:value] == true %><br/>
+<label for='value_false'>False: </label><%= radio_button_tag :value, "false", tr[:value] == false %><br/>
+</p>
