@@ -91,7 +91,7 @@ module ActsAsI18nUI
     def create_locale
       set_params
       create_locale_file( params[:locale], params[:locale_name] )
-      redirect_to  :action => "index"
+      redirect_to :back
     end
   
   private
