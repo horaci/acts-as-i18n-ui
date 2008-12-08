@@ -72,7 +72,7 @@ h2 {
 	text-align: left;
 }
 
-#filter_form, #create_locale_form {
+#filter_form, #create_locale_form, #create_key_form {
 	background-color: #EEE;
 	border: 1px solid black;
 	-moz-border-radius: 5px;
@@ -81,7 +81,7 @@ h2 {
 	padding: 10px;
 }
 
-#create_locale_form label { 
+#create_locale_form label, #create_key_form label { 
 	display: inline-block;
 	width: 80px;
 }

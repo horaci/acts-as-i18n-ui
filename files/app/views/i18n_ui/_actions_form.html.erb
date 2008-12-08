@@ -1,4 +1,4 @@
-<a href='#' onClick="$('create_locale_form').toggle()">&raquo; Create a new locale</a>
+<a href='#' onClick="$('create_locale_form').toggle()">&raquo; Create a new locale</a><br/>
 
 <div id='create_locale_form' style='display:none'>
 	
@@ -11,6 +11,36 @@
 <p>
 	<label for="create_locale_form_locale">Locale name:<label><input id="create_locale_form_locale_name" type="text" name="locale_name" value="">
 </p>
+
+<p align='right'>
+	<input type="submit" class="button create" value="Create">
+</p>
+
+<% end %>
+
+
+</div>
+
+<a href='#' onClick="$('create_key_form').toggle()">&raquo; Create a new key</a><br/>
+
+<div id='create_key_form' style='display:none'>
+	
+<% form_tag :action => "create_key" do -%>
+
+<p>
+	<label for="create_key_form_key">Key (including scope):</label><input id="create_key_form_key" type="text" name="key" size="20" value="">
+</p>
+
+<p>
+	<label for="create_key_form_type">Type of key:<label>
+	<%= select_tag :type, options_for_select( [["String","string"], ["Plural form", "hash"], ["Array list", "array"], ["Boolean value", "bool"]], params[:type] ), :id => "create_key_form_type" %>
+</p>
+
+<p>
+	<label for="create_key_form_locale">Locale: </b><br/>
+	<%= select_tag :locale, options_for_select( @languages.map { |locale| ["[#{locale}] - #{t "locale_name".to_sym, :locale => locale, :default => "(locale_name not found)"}", locale.to_s] }, params[:base_locale] ) %>
+</p>
+
 
 <p align='right'>
 	<input type="submit" class="button create" value="Create">
