@@ -93,6 +93,12 @@ module ActsAsI18nUI
       create_locale_file( params[:locale], params[:locale_name] )
       redirect_to :back
     end
+    
+    def create_key
+      set_params
+      create_locale_key( params[:key], params[:type], params[:locale] )
+      redirect_to :back
+    end
   
   private
   
@@ -132,8 +138,7 @@ module ActsAsI18nUI
           I18n.load_path << filename
           data = { locale => {} } unless data   
         end
-        
-  
+ 
         tmp = data
         
         # create middle hash keys as needed
@@ -185,18 +190,22 @@ module ActsAsI18nUI
           else
             type = "file"
         end
-  
-        data.keys.collect do |locale|
-          files << { :locale => locale, :filename => file, :type => type } 
-          locale = locale.to_sym
-          # Mix in (from simpe I18n backend)
-          translations[locale] ||= {}
-          sdata = deep_symbolize_keys(data)
-          merger = proc { |key, v1, v2| Hash === v1 && Hash === v2 ? v1.merge(v2, &merger) : v2 }
-          translations[locale].merge!(sdata[locale], &merger)
-          # Build global translation keys from all locales
-          globals.merge!(sdata[locale],&merger)
+
+        if data.is_a? Hash
+          # Skip non-hash translation files
+          data.keys.collect do |locale|
+            files << { :locale => locale, :filename => file, :type => type } 
+            locale = locale.to_sym
+            # Mix in (from simpe I18n backend)
+            translations[locale] ||= {}
+            sdata = deep_symbolize_keys(data)
+            merger = proc { |key, v1, v2| Hash === v1 && Hash === v2 ? v1.merge(v2, &merger) : v2 }
+            translations[locale].merge!(sdata[locale], &merger)
+            # Build global translation keys from all locales
+            globals.merge!(sdata[locale],&merger)
+          end
         end
+        
       end
   
       return {
@@ -318,6 +327,21 @@ module ActsAsI18nUI
     
     def create_locale_file( locale, locale_name )
       update_translation( "locale_name", locale_name, locale )
+    end
+    
+    def create_locale_key( key, type, locale )
+      case type
+        when "array"
+          value = []
+        when "plural"
+          value = {}
+        when "bool"
+          value = false
+        when "string"
+          value = ""
+      end
+      
+      update_translation( key, value, locale )   
     end
   end
 end
