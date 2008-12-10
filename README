@@ -4,11 +4,18 @@ ActsAsI18nUi
 An ActiveController extension to create a user interface to manage I18n
 translations.
 
+Requirements
+============
+
 Requires gems htmlentities and json:
 
 	gem install htmlentities
-	gem install json-pure
+	gem install json (or json-pure for windows)
 
+Installation
+============
+
+script/plugin install git://github.com/horaci/acts-as-i18n-ui.git
 
 Example
 =======
